@@ -92,8 +92,22 @@
 
 # Ближайший ноль ======================
 street = input()
-num_hoom = list(map(int, input('Введите через пробел ').split()))
-pos_0 = ()
+hoom = list(map(int, input('Введите через пробел ').split()))
+hoom_num = list(enumerate(hoom, start=1))
+hoom_null = list(filter(lambda x: x[1] == 0, hoom_num))
+# hoom_min = min(hoom_num, key=lambda i : i[1])
+print(hoom_num)
+# print(hoom_min)
 
-print(street, num_hoom)
+print(list(filter(lambda x: x[1] == 0, hoom_num)))
+
+def find_null(input_list):#, start):
+    i = 0
+    for x in input_list:
+        if x[1] != 0:
+            i += 1
+    return i
+
+print(find_null(hoom_num))
+
 
