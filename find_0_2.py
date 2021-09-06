@@ -1,28 +1,31 @@
-# Ближайший ноль ======================
-import time
-start_time = time.time()
+# id 52689459
 
-street = input()
-hoom = list(map(int, input().split()))
-l = len(hoom)
-res = [l]*l
-i = 1
-flag = False
+def find_0(hooms_numb, len_street):
+    len_street = int(len_street)
+    res = [len_street] * len_street
+    position = 1
 
-for x in range(0, l):
-    if hoom[x] == 0:
-        i = 0
-        flag = True
+    flag = False
+    for up in range(0, len_street):
+        if hooms_numb[up] == 0:
+            position = 0
+            flag = True
 
-    if flag: res[x] = i
-    i += 1
+        if flag: res[up] = position
+        position += 1
 
-for y in range(l-1, -1, -1):
-    if hoom[y] == 0:
-        i = 0
-    if res[y] > i: res[y] = i
-    i += 1
+    for down in range(len_street-1, -1, -1):
+        if hooms_numb[down] == 0:
+            position = 0
+        if res[down] > position: res[down] = position
+        position += 1
 
-print(" ".join(map(str, res)))
+    return (" ".join(map(str, res)))
 
-print("--- %s seconds ---" % (time.time() - start_time))
+def main():
+    len_street = input()
+    hooms_numb = list(map(int, input().split()))
+    print(find_0(hooms_numb, len_street))
+
+if __name__ == '__main__':
+    main()
