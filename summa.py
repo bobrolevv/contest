@@ -91,44 +91,23 @@
 #         # break
 
 # Ближайший ноль ======================
-# import traceback
-import time
-start_time = time.time()
-
-def find_null(input_list, start):
-    i1 = 0
-    res1 = None
-    res2 = None
-    len_list = len(input_list)
-    for x in range(start, len_list):
-        if input_list[x] == 0:
-            res1 = i1
-            break
-        i1 += 1
-
-    i1 = 0
-    for y in range(start, -1, -1):
-        if input_list[y] == 0:
-            # if res1 > i1: res1 = i1
-            res2 = i1
-            break
-        i1 += 1
-
-    # return res1
-    try:
-        return min(res1, res2)
-    except:
-        if res1 is None: return res2
-        if res2 is None: return res1
-
 street = input()
-hoom = list(map(int, input().split()))
+hoom = list(map(int, input('Введите через пробел ').split()))
+hoom_num = list(enumerate(hoom, start=1))
+hoom_null = list(filter(lambda x: x[1] == 0, hoom_num))
+# hoom_min = min(hoom_num, key=lambda i : i[1])
+print(hoom_num)
+# print(hoom_min)
 
-l = len(hoom)
-data = [0] * l
-for i in range(l):
-    data[i] = str(find_null(hoom, i))
-print(" ".join(data))
-# print(" ".join([str(find_null(hoom, x)) for x in range(0, len(hoom))]))
+print(list(filter(lambda x: x[1] == 0, hoom_num)))
 
-print("--- %s seconds ---" % (time.time() - start_time))
+def find_null(input_list):#, start):
+    i = 0
+    for x in input_list:
+        if x[1] != 0:
+            i += 1
+    return i
+
+print(find_null(hoom_num))
+
+
