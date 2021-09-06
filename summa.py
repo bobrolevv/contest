@@ -91,13 +91,16 @@
 #         # break
 
 # Ближайший ноль ======================
-import traceback
+# import traceback
+import time
+start_time = time.time()
+
 def find_null(input_list, start):
     i1 = 0
-    # i2 = 0
     res1 = None
     res2 = None
-    for x in range(start, len(input_list)):
+    len_list = len(input_list)
+    for x in range(start, len_list):
         if input_list[x] == 0:
             res1 = i1
             break
@@ -106,10 +109,12 @@ def find_null(input_list, start):
     i1 = 0
     for y in range(start, -1, -1):
         if input_list[y] == 0:
+            # if res1 > i1: res1 = i1
             res2 = i1
             break
         i1 += 1
 
+    # return res1
     try:
         return min(res1, res2)
     except:
@@ -119,8 +124,11 @@ def find_null(input_list, start):
 street = input()
 hoom = list(map(int, input().split()))
 
-l = ''
-for x in range(0, len(hoom)):
-    l = l + str(find_null(hoom, x)) + ' '
+l = len(hoom)
+data = [0] * l
+for i in range(l):
+    data[i] = str(find_null(hoom, i))
+print(" ".join(data))
+# print(" ".join([str(find_null(hoom, x)) for x in range(0, len(hoom))]))
 
-print(list(map)
+print("--- %s seconds ---" % (time.time() - start_time))
