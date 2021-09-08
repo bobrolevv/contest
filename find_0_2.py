@@ -1,11 +1,11 @@
-# id 52689459
+# id 52782682
 
-def find_0(hooms_numb, len_street):
-    len_street = int(len_street)
-    res = [len_street] * len_street
-    position = 1
+def find_zero(hooms_numb: str, len_street: str) -> str:
+    len_street: int = int(len_street)
+    res: int = [len_street] * len_street
+    position: int = 1
 
-    flag = False
+    flag: bool = False
     for up in range(0, len_street):
         if hooms_numb[up] == 0:
             position = 0
@@ -25,7 +25,7 @@ def find_0(hooms_numb, len_street):
 def main():
     len_street = input()
     hooms_numb = list(map(int, input().split()))
-    print(find_0(hooms_numb, len_street))
+    print(find_zero(hooms_numb, len_street))
 
 if __name__ == '__main__':
     main()
