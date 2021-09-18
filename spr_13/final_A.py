@@ -11,8 +11,8 @@ class Deque:
 
     def push_back(self, x):
         if self.size != self.max_n:
-            self.item[self.head] = x
-            self.tail = (self.head + 1) % self.max_n
+            self.item[self.tail -1] = x
+            self.tail = (self.tail - 1) % self.max_n
             self.size += 1
         else:
             return 'error'
@@ -28,20 +28,20 @@ class Deque:
     def pop_front(self):
         if self.is_empty():
             return 'error'
-        x = self.item[self.head -1]
+        x = self.item[self.head - 1]
         self.item[self.head - 1] = None
 
-        self.head = (self.head - 1) % self.size
+        self.head = (self.head - 1) % self.max_n
         self.size -= 1
         return x
 
     def pop_back(self):
         if self.is_empty():
             return 'error'
-        x = self.item[self.tail - 1]
-        self.item[self.tail - 1] = None
+        x = self.item[self.tail]  # - 1]
+        self.item[self.tail] = None
 
-        self.tail = (self.tail - 1) % self.size
+        self.tail = (self.tail + 1) % self.max_n
         self.size -= 1
         return x
 
@@ -54,28 +54,35 @@ def test():
     comand_count = int(input())
     max_leght = int(input())
     deque = Deque(max_leght)
+    # print(deque.head, deque.item, deque.tail, 'size:', deque.size)
 
     while comand_count:
         command_list = input().split()
         if 'push_back' in command_list:
             res = deque.push_back(command_list[1])
-            print(deque.item[0])
+            # print(deque.head, deque.item, deque.tail, 'size:', deque.size)
             if res: print(res)
 
         if 'pop_back' in command_list:
             res = deque.pop_back()
+            # print(deque.head, deque.item, deque.tail, 'size:', deque.size)
             if res: print(res)
 
         if 'push_front' in command_list:
             res = deque.push_front(command_list[1])
-            print(deque.item)
+            # print(deque.head, deque.item, deque.tail, 'size:', deque.size)
             if res: print(res)
 
         if 'pop_front' in command_list:
             res = deque.pop_front()
+            # print(deque.head, deque.item, deque.tail, 'size:', deque.size)
             if res: print(res)
 
+        # if deque.size == 0:
+        #     deque.head = 0
+        #     deque.tail = 0
         comand_count -= 1
 
 if __name__ == '__main__':
     test()
+    # print('==', (-1 % 10), '==')
