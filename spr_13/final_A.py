@@ -30,9 +30,9 @@ class Deque:
             return 'error'
         x = self.item[self.head -1]
         self.item[self.head - 1] = None
-        self.size -= 1
-        self.head = (self.head - 1) % self.size
 
+        self.head = (self.head - 1) % self.size
+        self.size -= 1
         return x
 
     def pop_back(self):
@@ -40,9 +40,9 @@ class Deque:
             return 'error'
         x = self.item[self.tail - 1]
         self.item[self.tail - 1] = None
-        self.size -= 1
-        self.tail = (self.tail - 1) % self.size
 
+        self.tail = (self.tail - 1) % self.size
+        self.size -= 1
         return x
 
     def __str__(self):
@@ -51,44 +51,31 @@ class Deque:
 
 
 def test():
-    comand_count = input()
+    comand_count = int(input())
     max_leght = int(input())
     deque = Deque(max_leght)
 
     while comand_count:
         command_list = input().split()
-
         if 'push_back' in command_list:
-            deque.push_back(command_list[1])
+            res = deque.push_back(command_list[1])
+            print(deque.item[0])
+            if res: print(res)
 
         if 'pop_back' in command_list:
-            deque.pop_back()
+            res = deque.pop_back()
+            if res: print(res)
 
         if 'push_front' in command_list:
-            deque.push_front(command_list[1])
+            res = deque.push_front(command_list[1])
+            print(deque.item)
+            if res: print(res)
 
         if 'pop_front' in command_list:
-            deque.pop_front()
+            res = deque.pop_front()
+            if res: print(res)
 
+        comand_count -= 1
 
 if __name__ == '__main__':
     test()
-    # pass
-#
-# comand_count = int(input())
-# max_leght = int(input())
-# deque = Deque(max_leght)
-#
-# deque.push_front(1111)
-# print(deque.head, deque, deque.tail, deque.size)
-# deque.push_front(2222)
-# print(deque.head, deque, deque.tail, deque.size)
-# deque.push_front(3333)
-# print(deque.head, deque, deque.tail, deque.size)
-# deque.push_back(7777)
-# print(deque.head, deque, deque.tail, deque.size)
-# print(deque.pop_front())
-# print(deque.head, deque, deque.tail, deque.size)
-# print(deque.pop_back())
-# print(deque.head, deque, deque.tail, deque.size)
-
