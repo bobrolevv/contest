@@ -11,8 +11,8 @@ class Deque:
 
     def push_back(self, x):
         if self.size != self.max_n:
-            self.item[self.tail] = x
-            self.tail = (self.tail + 1) % self.max_n
+            self.item[self.head] = x
+            self.tail = (self.head + 1) % self.max_n
             self.size += 1
         else:
             return 'error'
@@ -27,62 +27,68 @@ class Deque:
 
     def pop_front(self):
         if self.is_empty():
-            return None
-        x = self.deque[self.head]
-        self.deque[self.head] = None
-        self.head = (self.head + 1) % self.max_n
+            return 'error'
+        x = self.item[self.head -1]
+        self.item[self.head - 1] = None
         self.size -= 1
+        self.head = (self.head - 1) % self.size
+
         return x
 
     def pop_back(self):
-        pass
+        if self.is_empty():
+            return 'error'
+        x = self.item[self.tail - 1]
+        self.item[self.tail - 1] = None
+        self.size -= 1
+        self.tail = (self.tail - 1) % self.size
+
+        return x
 
     def __str__(self):
         return '-'.join(str(x) for x in self.item)
 
-comand_count = int(input())
-max_leght = int(input())
-deque = Deque(max_leght)
 
-# result_list = ['====',]
 
-# command_list = []
+def test():
+    comand_count = input()
+    max_leght = int(input())
+    deque = Deque(max_leght)
 
-# while comand_count:
-#     command_list = input().split()
-#     print(command_list)
-#     result_push = []
-#
-#     if 'push_back' in command_list:
-#         result_push = deque.push_back(command_list[1])
-#         if result_push == 'error':
-#             result_list.append(result_push)
-#
-#     if 'pop_back' in command_list:
-#         result_list.append(deque.pop_back())
-#
-#     if 'push_front' in command_list:
-#         print('pfr')
-#         result_push = deque.push_front(command_list[1])
-#         print(result_push)
-#         if result_push == 'error':
-#             result_list.append(result_push)
-#             print(result_list)
-#
-#     if 'pop_front' in command_list:
-#         result_list.append(deque.pop_front())
-#
-#     comand_count -= 1
+    while comand_count:
+        command_list = input().split()
 
-# if __name__ == '__main__':
-#     for i in result_list:
-#         print(i)
+        if 'push_back' in command_list:
+            deque.push_back(command_list[1])
 
-deque.push_front(1111)
-print(deque.head, deque, deque.tail, deque.size)
-deque.push_front(2222)
-print(deque.head, deque, deque.tail, deque.size)
-deque.push_front(3333)
-print(deque.head, deque, deque.tail, deque.size)
-deque.push_front(7777)
-print(deque.head, deque, deque.tail, deque.size)
+        if 'pop_back' in command_list:
+            deque.pop_back()
+
+        if 'push_front' in command_list:
+            deque.push_front(command_list[1])
+
+        if 'pop_front' in command_list:
+            deque.pop_front()
+
+
+if __name__ == '__main__':
+    test()
+    # pass
+#
+# comand_count = int(input())
+# max_leght = int(input())
+# deque = Deque(max_leght)
+#
+# deque.push_front(1111)
+# print(deque.head, deque, deque.tail, deque.size)
+# deque.push_front(2222)
+# print(deque.head, deque, deque.tail, deque.size)
+# deque.push_front(3333)
+# print(deque.head, deque, deque.tail, deque.size)
+# deque.push_back(7777)
+# print(deque.head, deque, deque.tail, deque.size)
+# print(deque.pop_front())
+# print(deque.head, deque, deque.tail, deque.size)
+# print(deque.pop_back())
+# print(deque.head, deque, deque.tail, deque.size)
+
