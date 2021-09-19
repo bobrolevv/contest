@@ -6,9 +6,9 @@ class Stack:
         self.items.append(item)
 
     def pop(self):
-        if self.items == []:
-            print('error')
-        return self.items.pop()
+        if self.items != []:
+            return self.items.pop()
+        return 'error'
 
     def peek(self):
         return self.items[-1]
@@ -21,12 +21,7 @@ class Stack:
             return 'None'
         return max(self.items)
 
-
 stack = Stack()
-# stack.push(1)
-# stack.push(3)
-# stack.push(555)
-# stack.push(7)
 
 n = int(input())
 while n:

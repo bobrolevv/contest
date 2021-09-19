@@ -51,15 +51,11 @@ def test() -> object:
         deque: Deque = Deque(max_leght)
 
         for i in range(0, comand_count):
-            command_list = inpt.readline().split()
-            if command_list[0] == 'push_back':
-                deque.push_back(command_list[1])
-            elif command_list[0] == 'pop_back':
-                print(deque.pop_back())
-            elif command_list[0] == 'push_front':
-                deque.push_front(command_list[1])
-            elif command_list[0] == 'pop_front':
-                print(deque.pop_front())
+            comm_list = inpt.readline().split()
+            if comm_list[0] == 'push_back': deque.push_back(comm_list[1])
+            elif comm_list[0] == 'pop_back': print(deque.pop_back())
+            elif comm_list[0] == 'push_front': deque.push_front(comm_list[1])
+            elif comm_list[0] == 'pop_front': print(deque.pop_front())
 
 if __name__ == '__main__':
     test()
