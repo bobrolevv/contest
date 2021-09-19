@@ -1,18 +1,18 @@
 # id 53206892
 class Deque:
     def __init__(self, n) -> object:
-        self.item = [None] * n
-        self.max_n = n
-        self.head = 0
-        self.tail = 0
-        self.size = 0
+        self.item: list[str] = [None] * n
+        self.max_n: int = n
+        self.head: int = 0
+        self.tail: int = 0
+        self.size: int = 0
 
     def is_empty(self) -> object:
         return self.size == 0
 
     def push_back(self, x) -> object:
         if self.size != self.max_n:
-            self.item[self.tail -1] = x
+            self.item[self.tail - 1] = x
             self.tail = (self.tail - 1) % self.max_n
             self.size += 1
         else:
