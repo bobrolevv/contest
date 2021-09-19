@@ -1,3 +1,4 @@
+# id 53206892
 class Deque:
     def __init__(self, n) -> object:
         self.item = [None] * n
