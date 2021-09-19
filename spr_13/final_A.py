@@ -1,6 +1,3 @@
-from typing import List
-
-
 class Deque:
     def __init__(self, n) -> object:
         self.item = [None] * n
@@ -12,7 +9,7 @@ class Deque:
     def is_empty(self) -> object:
         return self.size == 0
 
-    def push_back(self, x):
+    def push_back(self, x) -> object:
         if self.size != self.max_n:
             self.item[self.tail -1] = x
             self.tail = (self.tail - 1) % self.max_n
@@ -20,7 +17,7 @@ class Deque:
         else:
             print('error')
 
-    def push_front(self, x):
+    def push_front(self, x) -> object:
         if self.size != self.max_n:
             self.item[self.head] = x
             self.head = (self.head + 1) % self.max_n
@@ -28,7 +25,7 @@ class Deque:
         else:
             print('error')
 
-    def pop_front(self):
+    def pop_front(self) -> object:
         if self.is_empty():
             return 'error'
         x = self.item[self.head - 1]
@@ -37,7 +34,7 @@ class Deque:
         self.size -= 1
         return x
 
-    def pop_back(self):
+    def pop_back(self) -> object:
         if self.is_empty():
             return 'error'
         x = self.item[self.tail]
@@ -46,32 +43,22 @@ class Deque:
         self.size -= 1
         return x
 
-    # def __str__(self):
-    #     return '-'.join(str(x) for x in self.item)
-
-
-
 def test() -> object:
-    comand_count: int = int(input())
-    max_leght: int = int(input())
-    deque: Deque = Deque(max_leght)
+    with open('input.txt') as inpt:
+        comand_count: int = int(inpt.readline())
+        max_leght: int = int(inpt.readline())
+        deque: Deque = Deque(max_leght)
 
-    while comand_count:
-        command_list: List[str] = input().split()
-
-        if 'push_back' in command_list:
-            deque.push_back(command_list[1])
-
-        elif 'pop_back' in command_list:
-            print(deque.pop_back())
-
-        elif 'push_front' in command_list:
-            deque.push_front(command_list[1])
-
-        elif 'pop_front' in command_list:
-            print(deque.pop_front())
-            
-        comand_count -= 1
+        for i in range(0, comand_count):
+            command_list = inpt.readline().split()
+            if command_list[0] == 'push_back':
+                deque.push_back(command_list[1])
+            elif command_list[0] == 'pop_back':
+                print(deque.pop_back())
+            elif command_list[0] == 'push_front':
+                deque.push_front(command_list[1])
+            elif command_list[0] == 'pop_front':
+                print(deque.pop_front())
 
 if __name__ == '__main__':
     test()
