@@ -1,27 +1,27 @@
 # id 53206892
 class Deque:
-    def __init__(self, n) -> object:
-        self.item: list[str] = [None] * n
-        self.max_n: int = n
+    def __init__(self, n):
+        self.items: list[any] = [None] * n
+        self.maximum: int = n
         self.head: int = 0
         self.tail: int = 0
         self.size: int = 0
 
-    def is_empty(self) -> object:
+    def is_empty(self) -> bool:
         return self.size == 0
 
-    def push_back(self, x) -> object:
-        if self.size != self.max_n:
-            self.item[self.tail - 1] = x
-            self.tail = (self.tail - 1) % self.max_n
+    def push_back(self, item) -> list:
+        if self.size != self.maximum:
+            self.tail = (self.tail - 1) % self.maximum
+            self.items[self.tail] = item
             self.size += 1
         else:
             print('error')
 
     def push_front(self, x) -> object:
-        if self.size != self.max_n:
-            self.item[self.head] = x
-            self.head = (self.head + 1) % self.max_n
+        if self.size != self.maximum:
+            self.items[self.head] = x
+            self.head = (self.head + 1) % self.maximum
             self.size += 1
         else:
             print('error')
@@ -29,33 +29,35 @@ class Deque:
     def pop_front(self) -> object:
         if self.is_empty():
             return 'error'
-        x = self.item[self.head - 1]
-        self.item[self.head - 1] = None
-        self.head = (self.head - 1) % self.max_n
+        x = self.items[self.head - 1]
+        self.items[self.head - 1] = None
+        self.head = (self.head - 1) % self.maximum
         self.size -= 1
         return x
 
     def pop_back(self) -> object:
         if self.is_empty():
             return 'error'
-        x = self.item[self.tail]
-        self.item[self.tail] = None
-        self.tail = (self.tail + 1) % self.max_n
+        x = self.items[self.tail]
+        self.items[self.tail] = None
+        self.tail = (self.tail + 1) % self.maximum
         self.size -= 1
         return x
 
-def test() -> object:
-    with open('input.txt') as inpt:
-        comand_count: int = int(inpt.readline())
-        max_leght: int = int(inpt.readline())
-        deque: Deque = Deque(max_leght)
+def deque_maker(input_data):
+    # использую чтение из файла, т.к. с input() не проходит TL 23 тесте
+    with open(input_data) as input_data:
+        command_count: int = int(input_data.readline())
+        deque: Deque = Deque(int(input_data.readline()))
 
-        for i in range(0, comand_count):
-            comm_list = inpt.readline().split()
+        for i in range(0, command_count):
+            comm_list = input_data.readline().split()
             if comm_list[0] == 'push_back': deque.push_back(comm_list[1])
             elif comm_list[0] == 'pop_back': print(deque.pop_back())
             elif comm_list[0] == 'push_front': deque.push_front(comm_list[1])
             elif comm_list[0] == 'pop_front': print(deque.pop_front())
 
 if __name__ == '__main__':
-    test()
+
+    input_data = 'input_A.txt'
+    deque_maker(input_data)
