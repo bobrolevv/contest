@@ -1,4 +1,13 @@
-# id 53216994
+# id 53326152
+import operator
+
+METHODS = {'+': operator.add,
+           '-': operator.sub,
+           '*': operator.mul,
+           '/': operator.floordiv
+           }
+
+
 class Stack:
     def __init__(self):
         self.items = []
@@ -8,56 +17,31 @@ class Stack:
 
     def pop(self):
         if self.items == []:
-            print('error')
+            raise ValueError('Stack is empty')
         else:
             return self.items.pop()
 
-    def peek(self):
-        return self.items[-1]
 
-    def size(self):
-        return len(self.items)
+def polland_calc(input_file: str,
+                 stack=Stack(),
+                 methods=METHODS,
+                 digit_maker=int) -> int:
 
-    def get_max(self):
-        if self.items != []:
-            return max(self.items)
-        return 'None'
+    with open(input_file) as file:
+        input_data = file.readline().split()
 
-    def __str__(self):
-        return '-'.join(str(x) for x in self.items)
+        for item in input_data:
+            if item in methods:
+                b = stack.pop()
+                a = stack.pop()
+                stack.push(methods[item](a, b))
+            else: stack.push(digit_maker(item))
 
-def sum(a, b: int) -> int:
-    return (a + b)
-
-def razn(a, b: int) -> int:
-    return (b - a)
-
-def proizv(a, b: int) -> int:
-    return (a * b)
-
-def delen(a, b: int) -> int:
-    return (b // a)
-
-def test() -> int:
-    method_dict = {'+': sum,
-                   '-': razn,
-                   '*': proizv,
-                   '/': delen}
-
-    stack = Stack()
-    with open('input.txt') as file:
-
-        inpt = file.readline().split()
-
-        for i in inpt:
-            if i in method_dict:
-                a = int(stack.pop())
-                b = int(stack.pop())
-                res = method_dict[i](a, b)
-                stack.push(res)
-            else: stack.push(i)
-
-    print(stack.pop())
+    return stack.pop()
 
 if __name__ == '__main__':
-    test()
+
+    input_file = 'input.txt'
+    result = polland_calc(input_file)
+    print(result)
+
