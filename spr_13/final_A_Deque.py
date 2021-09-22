@@ -1,4 +1,4 @@
-# id 53370229
+# id 53370543
 class DequeException(Exception):
     pass
 
@@ -68,8 +68,6 @@ if __name__ == '__main__':
     for _ in range(0, command_count):
         input_data = input()
         item = deque_tester(input_data)
-        if item != None:
-            result.append(item)
+        if item != None: result.append(item)
 
-    for item in result:
-        print(item)
+    print(*result, sep='\n')
