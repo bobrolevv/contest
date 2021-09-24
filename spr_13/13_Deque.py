@@ -1,4 +1,4 @@
-# id 53370543
+# id 53416665
 class DequeException(Exception):
     pass
 
@@ -17,18 +17,16 @@ class Deque:
     def push_back(self, item):
         if self.size == self.maximum:
             raise DequeException('stack is full')
-        else:
-            self.tail = (self.tail - 1) % self.maximum
-            self.items[self.tail] = item
-            self.size += 1
+        self.tail = (self.tail - 1) % self.maximum
+        self.items[self.tail] = item
+        self.size += 1
 
     def push_front(self, item):
         if self.size == self.maximum:
             raise DequeException('stack is full')
-        else:
-            self.head = (self.head + 1) % self.maximum
-            self.items[self.head] = item
-            self.size += 1
+        self.head = (self.head + 1) % self.maximum
+        self.items[self.head] = item
+        self.size += 1
 
     def pop_front(self):
         if self.is_empty():
@@ -49,25 +47,22 @@ class Deque:
     def __str__(self):
         return '-'.join(str(x) for x in self.items)
 
-def deque_tester(input_data:str):
-    command, *params = input_data.split()
-    try:
-        item = getattr(deque, command)(*params)
-        return item
-    except DequeException:
-        return 'error'
-
 if __name__ == '__main__':
 
     command_count: int = int(input())
-    lenth_deque: int = int(input())
-
-    deque: Deque = Deque(lenth_deque)
+    deque: Deque = Deque(int(input()))
     result = []
 
     for _ in range(0, command_count):
-        input_data = input()
-        item = deque_tester(input_data)
+        item = None
+        command, *params = input().split()
+        try:
+            item = getattr(deque, command)(*params)
+        except DequeException:
+            item = 'error'
+        except AttributeError:
+            raise AttributeError(f'deque has no attribute {command}')
+
         if item != None: result.append(item)
 
     print(*result, sep='\n')
