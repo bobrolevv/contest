@@ -62,6 +62,8 @@ if __name__ == '__main__':
             item = 'error'
         except AttributeError:
             raise AttributeError(f'deque has no attribute {command}')
+        except ValueError:
+            raise ValueError(f'command {command} not found')
 
         if item != None: result.append(item)
 
