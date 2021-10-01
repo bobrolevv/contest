@@ -26,18 +26,17 @@ def polland_calc(input_data: list,
                  methods=METHODS,
                  digit_maker=int):
     stack = Stack() if stack is None else stack
-    digit_maker = int if digit_maker is None else digit_maker
 
     for item in input_data:
         if item in methods:
-            argument = stack.pop()
-            smargument = stack.pop()
-            stack.push(methods[item](smargument, argument))
+            argument_2 = stack.pop()
+            argument_1 = stack.pop()
+            stack.push(methods[item](argument_1, argument_2))
         else:
             try:
                 stack.push(digit_maker(item))
             except ValueError:
-                raise ValueError(f'invalid literal {item}, need digits')
+                raise ValueError(f'invalid literal {item}')
 
     return stack.pop()
 
