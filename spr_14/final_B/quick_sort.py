@@ -14,9 +14,9 @@ def partition(array, pivot, key):
 
 def quick_sort(array, key):
     '''
-    key: 0-login, 1-штраф, 2-баллы
+    key: 0-login, 1-баллы, 2-штраф
     02.10.2021 доделать:
-    1. штраф, баллы -> int
+    1. доработать логику трехэтапной сортировки
     2. добавить in-place
     '''
     if len(array) < 2:
@@ -30,9 +30,13 @@ if __name__ == '__main__':
     n = int(input())
     members = []
     for i in range(0, n):
-        member = input().split()
+        member = [int(x) if x.isdigit() else x for x in input().split()]
         members.append(member)
 
-    res = quick_sort(members, 2)
-    print(*res, sep='\n')
+    res = quick_sort(members, 1)
+
+    for i in range(len(res)-1, -1, -1):
+        print(res[i])
+
+    # print(*res, sep='\n')
 
