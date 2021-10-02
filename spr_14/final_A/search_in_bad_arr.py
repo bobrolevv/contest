@@ -12,11 +12,12 @@ def bin_search(nums, tgt, left, right):
     else:
         return bin_search(nums, tgt, mid + 1, right)
 
+
 def broken_search(nums, target) -> int:
     return bin_search(nums, target, 0, len(nums))
+
 
 def test():
     arr = [19, 21, 100, 101, 1, 4, 5, 7, 12]
     assert broken_search(arr, 5) == 6
-    # print(broken_search(arr, 5))# == 6
-# test()
+
